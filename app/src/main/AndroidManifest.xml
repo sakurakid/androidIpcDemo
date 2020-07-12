@@ -17,16 +17,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity"
+        <activity
+            android:name=".SecondActivity"
             android:configChanges="screenLayout"
             android:label="@string/app_name"
-            android:process=":SecondPross"/>
-
-        <activity android:name=".ThirdActivity"
+            android:process=":SecondPross" />
+        <activity
+            android:name=".ThirdActivity"
             android:configChanges="screenLayout"
             android:label="@string/app_name"
-            android:process="com.example.hass.androidipcdemo.remote"/>
+            android:process="com.example.hass.androidipcdemo.remote" />
 
+        <service
+            android:name=".MessengerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
+
+        <activity android:name=".MessangerActivity"
+            android:process=".MessangerActivity" ></activity>
     </application>
 
 </manifest>
