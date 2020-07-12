@@ -34,8 +34,17 @@
             android:exported="true"
             android:process=":remote" />
 
-        <activity android:name=".MessangerActivity"
-            android:process=".MessangerActivity" ></activity>
+        <activity
+            android:name=".MessangerActivity"
+            android:process=".MessangerActivity" />
+
+        <service
+            android:name=".AIDLService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
+
+        <activity android:name=".AIDLActivity"></activity>
     </application>
 
 </manifest>

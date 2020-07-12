@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          UserManger.SUserId = 2;
-        Intent intent = new Intent(this,MessangerActivity.class);
+        Intent intent = new Intent(this,AIDLActivity.class);
         startActivity(intent);
 
     }
