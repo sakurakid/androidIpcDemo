@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class AIDLService extends Service {
+    //因为多次读写
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
     private Binder mBinder = new IBookManger.Stub() {
         @Override

@@ -27,6 +27,12 @@ public class User implements Parcelable {
         }
     };
 
+    public User(int i, String hhhhh, boolean b) {
+        this.userId = i;
+        this.userName = hhhhh;
+        this.isMale = b;
+    }
+
     @Override
     public int describeContents() {
         return 0;
