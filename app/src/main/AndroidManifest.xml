@@ -37,14 +37,16 @@
         <activity
             android:name=".MessangerActivity"
             android:process=".MessangerActivity" />
+        <activity android:name=".AIDLActivity" />
 
+        <service
+            android:name=".IIpcDemo.BookManagerService"
+            android:enabled="true"
+            android:exported="true" />
         <service
             android:name=".AIDLService"
             android:enabled="true"
-            android:exported="true"
-            android:process=":remote" />
-
-        <activity android:name=".AIDLActivity"></activity>
+            android:exported="true"></service>
     </application>
 
 </manifest>

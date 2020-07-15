@@ -1,6 +1,7 @@
 // IBookManger.aidl
 package com.example.hasee.androidipcdemo;
 import com.example.hasee.androidipcdemo.Book;
+import com.example.hasee.androidipcdemo.IOnNewBookArrivedListener;
 // Declare any non-default types here with import statements
 //方法中参数修饰符可以是in、out、inout，也有自定义的类，该类需要实现Parcelable接口
 //in：客户端的参数输入；
@@ -11,4 +12,6 @@ interface IBookManger {
      void addBook(in Book book);
 
 
+     void registerListener(IOnNewBookArrivedListener listener);
+     void unregisterListener(IOnNewBookArrivedListener listener);
 }
