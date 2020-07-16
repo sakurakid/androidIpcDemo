@@ -80,6 +80,7 @@ public class AIDLActivity extends AppCompatActivity {
     protected void onDestroy() {
         if (mRemoteBookManager != null&&mRemoteBookManager.asBinder().isBinderAlive()){
             try {
+                Log.d(TAG, "unregister listener"+monNewBookArrivedListener);
                 mRemoteBookManager.unregisterListener(monNewBookArrivedListener);
             } catch (RemoteException e) {
                 e.printStackTrace();

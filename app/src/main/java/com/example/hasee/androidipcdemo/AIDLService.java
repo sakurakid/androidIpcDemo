@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -16,7 +17,9 @@ public class AIDLService extends Service {
     private AtomicBoolean mIsServiceDestoryed = new AtomicBoolean(false);
 
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<Book>();
-    private CopyOnWriteArrayList<IOnNewBookArrivedListener> mListenerList = new CopyOnWriteArrayList<IOnNewBookArrivedListener>();
+    //使用RemoteCallbackList 可以提供跨进程删除注册的接口
+    private RemoteCallbackList<IOnNewBookArrivedListener> mListenerList = new RemoteCallbackList<IOnNewBookArrivedListener>();
+   // private CopyOnWriteArrayList<IOnNewBookArrivedListener> mListenerList = new CopyOnWriteArrayList<IOnNewBookArrivedListener>();
     private Binder mBinder = new IBookManger.Stub() {
         @Override
         public List<Book> getBookList() throws RemoteException {
@@ -31,22 +34,13 @@ public class AIDLService extends Service {
 
         @Override
         public void registerListener(IOnNewBookArrivedListener listener) throws RemoteException {
-            if (!mListenerList.contains(listener)){
-                Log.d("callback","3");
-                mListenerList.add(listener);
-            }else {
-                Log.d(TAG,"already exists");
-            }
+            mListenerList.register(listener);
 
         }
 
         @Override
         public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
-            if (mListenerList.contains(listener)){
-                mListenerList.remove(listener);
-            }else {
-                Log.d(TAG,"unregister succeed");
-            }
+           mListenerList.unregister(listener);
 
         }
     };
@@ -74,12 +68,14 @@ public class AIDLService extends Service {
 
     private void onNewBookArrived(Book book)throws  RemoteException{
         mBookList.add(book);
-        for (int i = 0;i < mListenerList.size();i++){
-            IOnNewBookArrivedListener listener = mListenerList.get(i);
-            Log.d("callback","2");
-            listener.onNewBookArrived(book);
-            Log.d("callback","5");
+        final int N = mListenerList.beginBroadcast();
+        for (int i = 0;i < N ;i++){
+            IOnNewBookArrivedListener listener = mListenerList.getBroadcastItem(i);
+           if (listener!=null){
+               listener.onNewBookArrived(book);
+           }
         }
+        mListenerList.finishBroadcast();
     }
 
     private class ServiceWorker implements Runnable{

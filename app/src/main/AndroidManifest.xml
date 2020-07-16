@@ -46,7 +46,15 @@
         <service
             android:name=".AIDLService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <provider
+            android:name=".IIpcDemo.BookProvider"
+            android:authorities="com.example.hasee.androidipcdemo.ptovider"
+            android:permission="com.example.PROVIDER"
+            android:process=":provide"></provider>
+
+        <activity android:name=".ProviderActivity"></activity>
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          UserManger.SUserId = 2;
-        Intent intent = new Intent(this,AIDLActivity.class);
+        Intent intent = new Intent(this,ProviderActivity.class);
         startActivity(intent);
 
     }
