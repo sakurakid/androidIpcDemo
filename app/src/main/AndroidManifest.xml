@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hasee.androidipcdemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -52,9 +55,23 @@
             android:name=".IIpcDemo.BookProvider"
             android:authorities="com.example.hasee.androidipcdemo.ptovider"
             android:permission="com.example.PROVIDER"
-            android:process=":provide"></provider>
+            android:process=":provide" />
 
-        <activity android:name=".ProviderActivity"></activity>
+        <activity android:name=".ProviderActivity" />
+
+        <service
+            android:name=".TCPServerService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".SocketActivity" />
+
+        <service
+            android:name=".BinderPoolService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".BinderPoolActivity"></activity>
     </application>
 
 </manifest>

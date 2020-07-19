@@ -76,6 +76,7 @@ public class AIDLService extends Service {
            }
         }
         mListenerList.finishBroadcast();
+
     }
 
     private class ServiceWorker implements Runnable{
